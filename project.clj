@@ -72,6 +72,8 @@
      :jar true
      :compiler     {:main            homepage.core
                     :output-to       "resources/public/js/compiled/app.js"
+                    :output-dir      "resources/public/js/compiled/out"
+                    :asset-path      "js/compiled/out"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}
