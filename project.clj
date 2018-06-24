@@ -72,13 +72,11 @@
      :jar true
      :compiler     {:main            homepage.core
                     :output-to       "resources/public/js/compiled/app.js"
-                    :output-dir      "resources/public/js/compiled/out"
-                    :asset-path      "resources/public/js/compiled/out"
-                    :optimizations   :none
+                    :output-dir      "target"
+                    :source-map-timestamp true
+                    :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}
-
-
     ]}
 
   :main homepage.server
