@@ -60,7 +60,7 @@
      :figwheel     {:on-jsload "homepage.core/mount-root"}
      :compiler     {:main                 homepage.core
                     :output-to            "resources/public/js/compiled/app.js"
-                    :output-dir           "resources/public/js/compiled/out"
+                    :output-dir           "resources/public/js/compiled"
                     :asset-path           "js/compiled/out"
                     :source-map-timestamp true
                     :preloads             [devtools.preload]
@@ -73,7 +73,6 @@
      :compiler     {:main            homepage.core
                     :output-to       "resources/public/js/compiled/app.js"
                     :output-dir      "resources/public/js/compiled/out"
-                    :asset-path      "js/compiled/out"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}
