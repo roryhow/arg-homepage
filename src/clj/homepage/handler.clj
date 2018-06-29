@@ -6,7 +6,8 @@
             [homepage.index :refer [index]]))
 
 (defroutes routes
-  (GET "/" [] (resource-response "index.html" {:root "public"}))
+  ;; (GET "/" [] (resource-response "index.html" {:root "public"}))
+  (rfn [] (index))
   (resources "/"))
 
 (def dev-handler (-> #'routes wrap-reload))

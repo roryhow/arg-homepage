@@ -10,8 +10,9 @@
    (include-css "https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css")])
 
 (defn index []
-(html5
- (head)
- [:body
-  [:div#app]
-  (include-js "/js/app.js")]))
+  (html5
+   (head)
+   [:body
+    [:div#app]
+    (include-js "js/compiled/app.js")
+    [:script "homepage.core.init();"]]))
