@@ -1,21 +1,16 @@
 # homepage
 
-A [re-frame](https://github.com/Day8/re-frame) application designed to ... well, that part is up to you.
+A [re-frame](https://github.com/Day8/re-frame) application generally used for small tinkering, hosted at [www.roryhow.com](http://www.roryhow.com)
+
+There are no guarantees for this code to work; I will most likely break this repo (and the corresponding hosted site) from time to time.
 
 ## Development Mode
 
 ### Start Cider from Emacs:
 
-Put this in your Emacs config file:
-
-```
-(setq cider-cljs-lein-repl
-	"(do (require 'figwheel-sidecar.repl-api)
-         (figwheel-sidecar.repl-api/start-figwheel!)
-         (figwheel-sidecar.repl-api/cljs-repl))")
-```
-
 Navigate to a clojurescript file and start a figwheel REPL with `cider-jack-in-clojurescript` or (`C-c M-J`)
+
+You can also use `cider-jack-in-clj&cljs` to fire up both Clojure and Clojurescript REPLs
 
 ### Compile css:
 
