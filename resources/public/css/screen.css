@@ -4,3 +4,19 @@
   background-color: #77A6F7;
   padding: 10px 0px;
 }
+
+body {
+  background-color: #F5F5F5;
+  margin: 0px 10px;
+}
+
+.grid-container {
+  color: #333333;
+  display: grid;
+  font-family: Helvetica Neue, Verdana, Helvetica, Arial, sans-serif;
+  margin: 0 auto;
+  padding-top: 30px;
+  -webkit-font-smoothing: antialiased;
+  font-size: 1.125;
+  line-height: 1.5em;
+}
