@@ -3,4 +3,4 @@
             [homepage.styles.nav :refer [nav]]
             [homepage.styles.site :refer [site]]))
 
-(defstyles screen [nav site])
+(defstyles screen [site nav])

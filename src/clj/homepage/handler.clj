@@ -1,13 +1,22 @@
 (ns homepage.handler
-  (:require [compojure.core :refer [GET defroutes rfn]]
+  (:require [compojure.core :refer [GET POST defroutes rfn]]
             [compojure.route :refer [resources]]
             [ring.util.response :refer [resource-response]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [homepage.index :refer [index]]))
+            [homepage.index :refer [index]]
+            [homepage.bot :refer [send-message]]))
 
 (defroutes routes
+  ;; re-frame application
   (GET "/" [] (resource-response "index.html" {:root "public"}))
-  ;; (rfn [] (index))
+
+  ;; API
+  (POST "/send-message" req (send-message req))
+
+  ;; send the site as a fallback for everything
+  (rfn [] (resource-response "index.html" {:root "public"}))
+
+  ;; static resources
   (resources "/"))
 
 (def dev-handler (-> #'routes wrap-reload))

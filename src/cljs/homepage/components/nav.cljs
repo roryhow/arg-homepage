@@ -3,7 +3,7 @@
             [accountant.core :as accountant :refer [navigate!]]))
 
 (defn- nav-bar [active-page]
-  [:div
+  [:div.navigation
    [sa/Menu {:pointing true :class "nav--primary"}
     [sa/MenuItem {:name "HOME"
                   :active (= active-page :home-panel)

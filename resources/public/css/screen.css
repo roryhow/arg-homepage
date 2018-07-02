@@ -1,13 +1,6 @@
-.navigation {
-  margin: 0 auto;
-  color: #333333;
-  background-color: #77A6F7;
-  padding: 10px 0px;
-}
-
 body {
   background-color: #F5F5F5;
-  margin: 0px 10px;
+  margin: 10px 10px;
 }
 
 .grid-container {
@@ -19,4 +12,11 @@ body {
   -webkit-font-smoothing: antialiased;
   font-size: 1.125;
   line-height: 1.5em;
+}
+
+.navigation {
+  margin: 0 auto;
+  color: #333333;
+  padding: 10px 0px;
+  text-align: center;
 }
