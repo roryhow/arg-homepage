@@ -4,7 +4,7 @@
 
 
 (def body [:body { :background-color (:background-color colors)
-                  :margin "10px 10px"}])
+                  :margin "0px 10px"}])
 
 (def grid-container
   [:.grid-container { :color (:font-color colors)
