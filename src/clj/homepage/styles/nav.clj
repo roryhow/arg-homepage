@@ -2,8 +2,10 @@
   (:require [homepage.styles.colors :refer [colors]]))
 
 (def nav [:.navigation
-          {:margin "0 auto"
+          {:display "flex"
+           :justify-content "center"
+           :margin-bottom "30px"
            :color (:font-color colors)
-           :padding "10px 0px"
+           :padding "0px 0px"
            :text-align "center"}
           ])

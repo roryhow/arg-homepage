@@ -1,6 +1,6 @@
 (ns homepage.views.contact
   (:require-macros [cljs.core.async.macros :refer [go]])
-  (:require [reagent.core :as reagent :refer [atom]]
+  (:require [reagent.core :as r]
             [cljs-http.client :as http]
             [soda-ash.core :as sa]))
 
@@ -9,7 +9,7 @@
   (http/post "/send-message" {:json-params content}))
 
 (defn contact-panel []
-  (let [content (atom {:firstname "" :lastname "" :email "" :message ""})]
+  (let [content (r/atom {:firstname "" :lastname "" :email "" :message ""})]
     (fn []
       [sa/Form {:onSubmit #(form-submit @content)}
        [sa/FormGroup {:widths "equal"}
