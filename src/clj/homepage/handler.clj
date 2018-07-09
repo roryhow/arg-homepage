@@ -3,7 +3,6 @@
             [compojure.route :refer [resources]]
             [ring.util.response :refer [resource-response]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [homepage.index :refer [index]]
             [homepage.bot :refer [send-message]]))
 
 (defroutes routes
