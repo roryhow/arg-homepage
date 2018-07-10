@@ -73,7 +73,7 @@
      :compiler     {:main            homepage.core
                     :output-to       "resources/public/js/compiled/app.js"
                     :output-dir      "resources/public/js/out"
-                    :asset-path      "js/compiled/out"
+                    :asset-path      "js/out"
                     :source-map-timestamp true
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
