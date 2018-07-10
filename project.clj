@@ -59,9 +59,9 @@
      :source-paths ["src/cljs"]
      :figwheel     {:on-jsload "homepage.core/mount-root"}
      :compiler     {:main                 homepage.core
-                    :output-to            "resources/public/js/compiled/app.js"
-                    :output-dir           "resources/public/js/compiled/out"
-                    :asset-path           "js/compiled/out"
+                    :output-to            "resources/public/js/app.js"
+                    :output-dir           "resources/public/js/out"
+                    :asset-path           "js/out"
                     :source-map-timestamp true
                     :preloads             [devtools.preload]
                     :external-config      {:devtools/config {:features-to-install :all}}
