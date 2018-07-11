@@ -13,7 +13,7 @@
   (POST "/send-message" req (send-message req))
 
   ;; send the site as a fallback for everything
-  (rfn [] (resource-response "index.html" {:root "public"}))
+  ;; (rfn [] (resource-response "index.html" {:root "public"}))
 
   ;; static resources
   (resources "/"))
