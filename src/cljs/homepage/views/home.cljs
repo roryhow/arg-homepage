@@ -9,14 +9,14 @@
   (let [revealed? (r/atom false)]
     (fn []
       (js/setTimeout #(reset! revealed? true) 1000)
-      [sa/Reveal {:animated "rotate" :instant false :active @revealed?}
+      [sa/Reveal {:animated "move" :instant false :active @revealed?}
        [sa/RevealContent {:hidden true}
-        [sa/Image {:src "/assets/me.jpeg" :size "medium" :circular true }]]
+        [sa/Image {:src "/assets/me.jpeg" :size "medium" }]]
        [sa/RevealContent {:visible true}
-        [sa/Image {:src "/assets/square-image.png" :size "medium" :circular true }]]])))
+        [sa/Image {:src "/assets/square-image.png" :size "medium"  }]]])))
 
 ;; home
 (defn home-panel []
-[sa/Container {:className "home-panel"}
- [:h1 "Hi there! I'm Rory."]
- [self-image]])
+  [:div {:className "home-panel"}
+   [:h1 "Hi there! I'm Rory."]
+   [self-image]])

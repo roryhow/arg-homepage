@@ -12,11 +12,11 @@
   ;; API
   (POST "/send-message" req (send-message req))
 
-  ;; send the site as a fallback for everything
-  ;; (rfn [] (resource-response "index.html" {:root "public"}))
-
   ;; static resources
-  (resources "/"))
+  (resources "/")
+
+  ;; send the site as a fallback for everything
+  (rfn [] (resource-response "index.html" {:root "public"})))
 
 (def dev-handler (-> #'routes wrap-reload))
 

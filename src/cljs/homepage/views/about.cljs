@@ -1,9 +1,5 @@
 (ns homepage.views.about
-  ;; (:require [soda-ash.core :as sa]
-  ;;           [re-frame.core :as re-frame]
-  ;;           [homepage.subs :as subs]
-  ;;           [accountant.core :refer [navigate!]])
-  )
+  (:require [soda-ash.core :as sa]))
 
 (defn about-panel []
   [:div
