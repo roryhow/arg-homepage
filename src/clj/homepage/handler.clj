@@ -12,6 +12,9 @@
   ;; API
   (POST "/send-message" req (send-message req))
 
+  ;; SSL validation
+  (GET "/.well-known/acme-challenge/:content" [content] (str "NHW8bLy0ngftET6LX8Mp7jSV2tjPrdeulnHDjvaEEf0.1XLruy00U4agvLu8bjnIVI8sN8BniigkL8g89kGl8Pw"))
+
   ;; static resources
   (resources "/")
 
