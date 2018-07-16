@@ -25,7 +25,8 @@
                                     "resources/public/css"]
 
   :figwheel {:css-dirs ["resources/public/css"]
-             :ring-handler homepage.handler/dev-handler}
+             :ring-handler homepage.handler/dev-handler
+             :server-logfile false}
 
   :garden {:builds [{:id           "screen"
                      :source-paths ["src/clj"]

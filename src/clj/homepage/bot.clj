@@ -4,5 +4,6 @@
 ;;   {:message (str "Thanks for your message: " message)})
 
 (defn send-message [req]
-  (prn req)
-  req)
+  (do
+    (println req)
+    req))
