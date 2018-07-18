@@ -12,6 +12,7 @@
                  [hiccup "1.0.5"]
                  [venantius/accountant "0.2.4"]
                  [yogthos/config "0.8"]
+                 [ring/ring-defaults "0.3.1"]
                  [ring "1.4.0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
@@ -25,7 +26,7 @@
                                     "resources/public/css"]
 
   :figwheel {:css-dirs ["resources/public/css"]
-             :ring-handler homepage.handler/dev-handler
+             :ring-handler homepage.handler/handler
              :server-logfile false}
 
   :garden {:builds [{:id           "screen"
@@ -48,16 +49,20 @@
   {:dev
    {:dependencies [[binaryage/devtools "0.9.10"]
                    [figwheel-sidecar "0.5.16"]
+                   [ring/ring-devel "1.6.3"]
+                   [prone "1.1.4"]
                    [cider/piggieback "0.3.5"]]
 
     :plugins      [[lein-figwheel "0.5.16"]
-                   [lein-pdo "0.1.1"]]}
+                   [lein-pdo "0.1.1"]]
+    :source-paths ["env/dev/clj"]
+    :env {:dev true}}
    :prod { }}
 
   :cljsbuild
   {:builds
    [{:id           "dev"
-     :source-paths ["src/cljs"]
+     :source-paths ["src/cljs" "env/dev/cljs"]
      :figwheel     {:on-jsload "homepage.core/mount-root"}
      :compiler     {:main                 homepage.core
                     :output-to            "resources/public/js/compiled/app.js"
@@ -69,7 +74,7 @@
                     }}
 
     {:id           "min"
-     :source-paths ["src/cljs"]
+     :source-paths ["src/cljs" "env/prod/cljs"]
      :jar true
      :compiler     {:main            homepage.core
                     :output-to       "resources/public/js/compiled/app.js"
@@ -83,6 +88,12 @@
   :aot [homepage.server]
 
   :uberjar-name "homepage.jar"
+  :uberjar {:hooks [minify-assets.plugin/hooks]
+            :source-paths ["env/prod/clj"]
+            :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
+            :env {:production true}
+            :aot :all
+            :omit-source true}
 
   :prep-tasks [["cljsbuild" "once" "min"]["garden" "once"] "compile"]
   )

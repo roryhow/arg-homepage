@@ -3,7 +3,8 @@
             [compojure.route :refer [resources]]
             [ring.util.response :refer [resource-response]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [homepage.bot :refer [send-message]]))
+            [homepage.bot :refer [send-message]]
+            [homepage.middleware :refer [wrap-middleware]]))
 
 (defroutes routes
   ;; re-frame application
@@ -18,6 +19,4 @@
   ;; send the site as a fallback for everything
   (rfn [] (resource-response "index.html" {:root "public"})))
 
-(def dev-handler (-> #'routes wrap-reload))
-
-(def handler routes)
+(def handler (wrap-middleware #'routes))

@@ -5,5 +5,5 @@
 
 (defn send-message [req]
   (do
-    (println req)
+    (println (:body req))
     req))
