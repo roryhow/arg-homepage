@@ -59,7 +59,18 @@
                    [lein-pdo "0.1.1"]]
     :source-paths ["env/dev/clj"]
     :env {:dev true}}
-   :prod { }}
+   :prod
+   {:source-paths ["env/prod/clj"]
+    :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
+    :env {:production true}
+    :aot :all
+    :omit-source true }
+   :uberjar
+   {:source-paths ["env/prod/clj"]
+    :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
+    :env {:production true}
+    :aot :all
+    :omit-source true}}
 
   :cljsbuild
   {:builds
@@ -90,12 +101,6 @@
   :aot [homepage.server]
 
   :uberjar-name "homepage.jar"
-  :uberjar {:hooks [minify-assets.plugin/hooks]
-            :source-paths ["env/prod/clj"]
-            :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
-            :env {:production true}
-            :aot :all
-            :omit-source true}
 
   :prep-tasks [["cljsbuild" "once" "min"]["garden" "once"] "compile"]
   )
