@@ -9,14 +9,13 @@
 (defroutes routes
   ;; re-frame application
   (GET "/" [] (resource-response "index.html" {:root "public"}))
+  (GET "/about" [] (resource-response "index.html" {:root "public"}))
+  (GET "/contact" [] (resource-response "index.html" {:root "public"}))
 
   ;; API
   (POST "/send-message" req (send-message req))
 
   ;; static resources
-  (resources "/")
-
-  ;; send the site as a fallback for everything
-  (rfn [] (resource-response "index.html" {:root "public"})))
+  (resources "/"))
 
 (def handler (wrap-middleware #'routes))
