@@ -52,6 +52,7 @@
   {:dev
    {:dependencies [[binaryage/devtools "0.9.10"]
                    [figwheel-sidecar "0.5.16"]
+                   [ring/ring-mock "0.3.2"]
                    [ring/ring-devel "1.6.3"]
                    [prone "1.6.0"]
                    [cider/piggieback "0.3.6"]]

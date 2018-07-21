@@ -2,7 +2,9 @@
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [reagent.core :as r]
             [cljs-http.client :as http]
-            [soda-ash.core :as sa]))
+            [soda-ash.core :as sa]
+            [homepage.components.recaptcha :refer [recaptcha]]
+            [homepage.utils :refer [clj->json]]))
 
 (defn form-submit [content]
   (.log js/console content)
@@ -42,4 +44,6 @@
           :onChange #(swap! content assoc :message (.-value %2))
           }]]
        [sa/FormField
-        [sa/Button {:type "submit"} "submit"]]])))
+        [sa/Button {:type "submit"} "submit"]]
+       [recaptcha]
+       ])))

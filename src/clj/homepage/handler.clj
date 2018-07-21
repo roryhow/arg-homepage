@@ -1,10 +1,10 @@
 (ns homepage.handler
-  (:require [compojure.core :refer [GET POST defroutes rfn]]
+  (:require [compojure.core :refer [GET POST defroutes routes rfn]]
             [compojure.route :refer [resources]]
             [ring.util.response :refer [resource-response content-type]]
             [ring.middleware.reload :refer [wrap-reload]]
             [homepage.bot :refer [send-message]]
-            [homepage.middleware :refer [wrap-middleware wrap-api-middleware]]))
+            [homepage.middleware :refer [wrap-front-middleware wrap-api-middleware]]))
 
 (defn- send-front []
   (content-type (resource-response "index.html" {:root "public"}) "text/html; charset=utf-8"))
@@ -23,4 +23,4 @@
 
 (def handler
   (routes (wrap-front-middleware #'front-and-resource-routes)
-          (wrap-api-middlware #'api-routes)))
+          (wrap-api-middleware #'api-routes)))
