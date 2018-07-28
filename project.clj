@@ -1,8 +1,8 @@
 (defproject homepage "0.1.0-SNAPSHOT"
   :description "Rory How homepage"
   :url "http://www.roryhow.com"
-  :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.10.238"]
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/clojurescript "1.10.339"]
                  [reagent "0.8.1"]
                  [re-frame "0.10.5"]
                  [secretary "1.2.3"]
