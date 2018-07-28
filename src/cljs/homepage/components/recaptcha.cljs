@@ -6,8 +6,7 @@
 
 (defn ^:export onload [] (reset! has-loaded true))
 
-;; these aren't being called
-(defn ^:export data-callback [] (print "data callback!"))
+(defn ^:export data_callback [x] (print (str "data callback!\n" x)))
 (defn ^:export data-expired-callback [] (print "data expired callback!"))
 
 (defn- render-recaptcha []
@@ -20,6 +19,6 @@
       :component-did-mount #(if api-loaded? (render-recaptcha) (print "didn't render recaptcha"))
       :reagent-render (fn [] [sa/FormField
                              [:div.g-recaptcha {:data-sitekey "6LeMcWUUAAAAAOSsfkGq0YQ1aiwEPkrpy_B77jhP"
-                                                :data-callback "homepage.components.recaptcha.data_callback"
-                                                :data-expired-callback "homepage.components.recaptcha.data_expired_callback"
+                                                :data-callback "onDataCallback"
+                                                :data-expired-callback "onExpiredCallback"
                                                 :id "g-recaptcha"}]])})))
