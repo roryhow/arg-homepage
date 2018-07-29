@@ -7,8 +7,8 @@
 
 (defn ^:export onload [] (reset! has-loaded true))
 
-(defn ^:export data_callback [x] (dispatch [::set-recaptcha-response x]))
-(defn ^:export data-expired-callback [] (dispatch [::set-recaptcha-expired]))
+(defn ^:export data_callback [x] (dispatch [:homepage.events/set-recaptcha-response x]))
+(defn ^:export data_expired_callback [] (dispatch [:homepage.events/set-recaptcha-expired]))
 
 (defn- render-recaptcha []
   (.render js/grecaptcha "g-recaptcha" (clj->js :sitekey "6LeMcWUUAAAAAOSsfkGq0YQ1aiwEPkrpy_B77jhP")))

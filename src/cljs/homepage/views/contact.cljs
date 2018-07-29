@@ -15,7 +15,7 @@
 
 (defn contact-panel []
   (let [content (r/atom {:firstname "" :lastname "" :email "" :message ""})
-        recaptcha-token (subscribe [::recaptcha-token])]
+        recaptcha-token (subscribe [:homepage.subs/recaptcha-token])]
     (fn []
       [sa/Form {:onSubmit #(form-submit @content @recaptcha-token) :method "POST"}
        [sa/FormGroup {:widths "equal"}
