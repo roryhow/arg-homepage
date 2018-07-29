@@ -56,6 +56,7 @@
                    [ring/ring-devel "1.6.3"]
                    [prone "1.6.0"]
                    [cider/piggieback "0.3.6"]
+                   [day8.re-frame/tracing "0.5.1"]
                    [day8.re-frame/re-frame-10x "0.3.3-react16"]]
 
     :plugins      [[lein-figwheel "0.5.16"]
@@ -65,6 +66,7 @@
    :prod
    {:source-paths ["env/prod/clj"]
     :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
+    :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]
     :env {:production true}
     :aot :all
     :omit-source true }
@@ -85,7 +87,8 @@
                     :output-dir           "resources/public/js/compiled/out"
                     :asset-path           "js/compiled/out"
                     :source-map-timestamp true
-                    :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true}
+                    :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true
+                                           "day8.re_frame.tracing.trace_enabled_QMARK_"  true}
                     :preloads             [devtools.preload day8.re-frame-10x.preload]
                     :external-config      {:devtools/config {:features-to-install :all}}
                     }}
