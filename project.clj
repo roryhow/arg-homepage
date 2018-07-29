@@ -55,7 +55,8 @@
                    [ring/ring-mock "0.3.2"]
                    [ring/ring-devel "1.6.3"]
                    [prone "1.6.0"]
-                   [cider/piggieback "0.3.6"]]
+                   [cider/piggieback "0.3.6"]
+                   [day8.re-frame/re-frame-10x "0.3.3-react16"]]
 
     :plugins      [[lein-figwheel "0.5.16"]
                    [lein-pdo "0.1.1"]]
@@ -84,7 +85,8 @@
                     :output-dir           "resources/public/js/compiled/out"
                     :asset-path           "js/compiled/out"
                     :source-map-timestamp true
-                    :preloads             [devtools.preload]
+                    :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true}
+                    :preloads             [devtools.preload day8.re-frame-10x.preload]
                     :external-config      {:devtools/config {:features-to-install :all}}
                     }}
 
