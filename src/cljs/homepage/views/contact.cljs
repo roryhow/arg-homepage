@@ -1,19 +1,23 @@
 (ns homepage.views.contact
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [reagent.core :as r]
+            [re-frame.core :refer [subscribe]]
             [cljs-http.client :as http]
             [soda-ash.core :as sa]
             [homepage.components.recaptcha :refer [recaptcha]]
             [homepage.utils :refer [clj->json]]))
 
-(defn form-submit [content]
-  (.log js/console content)
-  (http/post "/send-message" {:json-params content}))
+(defn form-submit [content token]
+  (print content)
+  (print token)
+  (http/post "/send-message" {:json-params content
+                              :headers {"g-recaptcha-response" token}}))
 
 (defn contact-panel []
-  (let [content (r/atom {:firstname "" :lastname "" :email "" :message ""})]
+  (let [content (r/atom {:firstname "" :lastname "" :email "" :message ""})
+        recaptcha-token (subscribe [::recaptcha-token])]
     (fn []
-      [sa/Form {:onSubmit #(form-submit @content)}
+      [sa/Form {:onSubmit #(form-submit @content @recaptcha-token) :method "POST"}
        [sa/FormGroup {:widths "equal"}
         [sa/FormInput
          {:fluid true

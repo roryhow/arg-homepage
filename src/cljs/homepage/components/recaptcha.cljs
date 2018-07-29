@@ -1,13 +1,14 @@
 (ns homepage.components.recaptcha
   (:require [reagent.core :as r]
-            [soda-ash.core :as sa]))
+            [soda-ash.core :as sa]
+            [re-frame.core :refer [dispatch]]))
 
 (defonce has-loaded (r/atom false))
 
 (defn ^:export onload [] (reset! has-loaded true))
 
-(defn ^:export data_callback [x] (print (str "data callback!\n" x)))
-(defn ^:export data-expired-callback [] (print "data expired callback!"))
+(defn ^:export data_callback [x] (dispatch [::set-recaptcha-response x]))
+(defn ^:export data-expired-callback [] (dispatch [::set-recaptcha-expired]))
 
 (defn- render-recaptcha []
   (.render js/grecaptcha "g-recaptcha" (clj->js :sitekey "6LeMcWUUAAAAAOSsfkGq0YQ1aiwEPkrpy_B77jhP")))
@@ -16,7 +17,7 @@
   (let [api-loaded? @has-loaded]
     (r/create-class
      {:display-name "recaptcha"
-      :component-did-mount #(if api-loaded? (render-recaptcha) (print "didn't render recaptcha"))
+      :component-did-mount #(if api-loaded? (render-recaptcha))
       :reagent-render (fn [] [sa/FormField
                              [:div.g-recaptcha {:data-sitekey "6LeMcWUUAAAAAOSsfkGq0YQ1aiwEPkrpy_B77jhP"
                                                 :data-callback "onDataCallback"
