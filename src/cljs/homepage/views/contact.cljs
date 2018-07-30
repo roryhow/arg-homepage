@@ -47,7 +47,7 @@
           :value (:message @content)
           :onChange #(swap! content assoc :message (.-value %2))
           }]]
-       [sa/FormField
-        [sa/Button {:type "submit"} "submit"]]
-       [recaptcha]
+       [sa/FormField {:style {:display "flex" :flex-direction "row" :justify-content "space-between" }}
+        [recaptcha]
+        [sa/Button {:type "submit" :disabled (nil? @recaptcha-token)} "submit"]]
        ])))
