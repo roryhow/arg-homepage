@@ -22,4 +22,4 @@
 (re-frame/reg-event-db
  ::set-recaptcha-expired
  (fn-traced [db _]
-            (assoc db :recptcha-token nil)))
+            (assoc db :recaptcha-token nil)))
