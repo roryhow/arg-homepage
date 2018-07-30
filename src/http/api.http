@@ -1,5 +1,10 @@
-POST http://localhost:3000/send-message
+POST http://localhost:3449/send-message
+Content-Type: application/json
+g-recaptcha-response: stub
 
 {
-  "foo": "bar",
+  "firstname": "Rory",
+  "lastname": "How",
+  "email": "rhow93@gmail.com",
+  "message": "Hello there, Rory!"
 }
