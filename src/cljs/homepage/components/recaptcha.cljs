@@ -11,14 +11,11 @@
 (defn ^:export data_expired_callback [] (dispatch [:homepage.events/set-recaptcha-expired]))
 
 (defn- render-recaptcha []
-  (data_expired_callback) ;; clear recaptcha results & trigger button
+  (data_expired_callback) ;; clear recaptcha results
   (.render js/grecaptcha "g-recaptcha" (clj->js :sitekey "6LeMcWUUAAAAAOSsfkGq0YQ1aiwEPkrpy_B77jhP")))
 
 (defn recaptcha []
-  (let [api-loaded? @has-loaded
-        ;; subscribe to recaptcha for rerender on captcha state change
-        _ (subscribe [:homepage.subs/recaptcha-token])]
-
+  (let [api-loaded? @has-loaded]
     (r/create-class
      {:display-name "recaptcha"
       :component-did-mount #(when api-loaded? (render-recaptcha))
