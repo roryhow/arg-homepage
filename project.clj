@@ -5,6 +5,7 @@
                  [org.clojure/clojurescript "1.10.339"]
                  [reagent "0.8.1"]
                  [re-frame "0.10.5"]
+                 [environ "1.1.0"]
                  [secretary "1.2.3"]
                  [garden "1.3.5"]
                  [ns-tracker "0.3.1"]

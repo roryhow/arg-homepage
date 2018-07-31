@@ -19,7 +19,10 @@
   (resources "/"))
 
 (defroutes api-routes
-  (POST "/send-message" req (send-message req)))
+  (POST "/send-message" [:as {h :headers b :body}]
+        (let [recaptcha-token (get h "g-recaptcha-response")]
+          (do
+            (send-message b)))))
 
 (def handler
   (routes (wrap-front-middleware #'front-and-resource-routes)

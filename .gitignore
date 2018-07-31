@@ -7,3 +7,4 @@ pom.xml
 out
 .nrepl-port
 *.css
+profiles.clj

@@ -1,7 +1,6 @@
 (ns homepage.bot)
 
-
-(defn send-message [{ body :body }]
+(defn send-message [body]
   (let [first (get body "firstname")
         last (get body "lastname")
         email (get body "email")
