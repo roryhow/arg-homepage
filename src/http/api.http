@@ -1,6 +1,7 @@
 POST http://localhost:3449/send-message
 Content-Type: application/json
 g-recaptcha-response: stub
+api-key: testing
 
 {
   "firstname": "Rory",

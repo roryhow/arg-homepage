@@ -20,6 +20,7 @@
                  [ring "1.6.3"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
+            [lein-environ "1.1.0"]
             [lein-garden "0.2.8"]]
 
   :min-lein-version "2.5.3"
@@ -50,7 +51,11 @@
                      ["garden" "once"]]}
 
   :profiles
-  {:dev
+  {:dev [:project/dev :profiles/dev]
+   :prod [:project/prod :profiles/prod]
+   :uberjar [:project/uberjar :profiles/uberjar]
+   :profiles/dev {}
+   :project/dev
    {:dependencies [[binaryage/devtools "0.9.10"]
                    [figwheel-sidecar "0.5.16"]
                    [ring/ring-mock "0.3.2"]
@@ -62,16 +67,19 @@
 
     :plugins      [[lein-figwheel "0.5.16"]
                    [lein-pdo "0.1.1"]]
-    :source-paths ["env/dev/clj"]
-    :env {:dev true}}
-   :prod
+    :source-paths ["env/dev/clj"]}
+
+   :profiles/prod {}
+   :project/prod
    {:source-paths ["env/prod/clj"]
     :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
     :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]
     :env {:production true}
     :aot :all
     :omit-source true }
-   :uberjar
+
+   :profiles/uberjar {}
+   :project/uberjar
    {:source-paths ["env/prod/clj"]
     :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
     :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]
