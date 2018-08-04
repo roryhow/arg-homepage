@@ -77,7 +77,6 @@
    {:source-paths ["env/prod/clj"]
     :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
     :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]
-    :env {:production true}
     :aot :all
     :omit-source true }
 
@@ -87,7 +86,6 @@
    {:source-paths ["env/prod/clj"]
     :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
     :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]
-    :env {:production true}
     :aot :all
     :omit-source true}}
 

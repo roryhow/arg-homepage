@@ -9,6 +9,7 @@
             [homepage.utils :refer [clj->json]]))
 
 (defn ^:export get-api-key [] (api-key))
+
 (defn form-submit [content token]
   (http/post "/send-message" {:json-params content
                               :headers {"g-recaptcha-response" token
