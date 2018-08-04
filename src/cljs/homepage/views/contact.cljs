@@ -1,5 +1,6 @@
 (ns homepage.views.contact
-  (:require-macros [cljs.core.async.macros :refer [go]])
+  (:require-macros [cljs.core.async.macros :refer [go]]
+                   [homepage.env :refer [api-key]])
   (:require [reagent.core :as r]
             [re-frame.core :refer [subscribe]]
             [cljs-http.client :as http]
@@ -8,10 +9,9 @@
             [homepage.utils :refer [clj->json]]))
 
 (defn form-submit [content token]
-  (print content)
-  (print token)
   (http/post "/send-message" {:json-params content
-                              :headers {"g-recaptcha-response" token}}))
+                              :headers {"g-recaptcha-response" token
+                                        "api-key" (api-key)}}))
 
 (defn contact-panel []
   (let [content (r/atom {:firstname "" :lastname "" :email "" :message ""})

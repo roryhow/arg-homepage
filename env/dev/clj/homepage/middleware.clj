@@ -20,7 +20,6 @@
 
 (defn wrap-front-middleware [handler]
   (-> handler
-      ;; (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))
       (wrap-defaults (assoc site-defaults :security false))
       wrap-exceptions
       wrap-reload))

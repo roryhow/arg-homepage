@@ -54,6 +54,8 @@
   {:dev [:project/dev :profiles/dev]
    :prod [:project/prod :profiles/prod]
    :uberjar [:project/uberjar :profiles/uberjar]
+
+   ;; dev env
    :profiles/dev {}
    :project/dev
    {:dependencies [[binaryage/devtools "0.9.10"]
@@ -69,6 +71,7 @@
                    [lein-pdo "0.1.1"]]
     :source-paths ["env/dev/clj"]}
 
+   ;; prod env
    :profiles/prod {}
    :project/prod
    {:source-paths ["env/prod/clj"]
@@ -78,6 +81,7 @@
     :aot :all
     :omit-source true }
 
+   ;; heroku env
    :profiles/uberjar {}
    :project/uberjar
    {:source-paths ["env/prod/clj"]
@@ -119,5 +123,4 @@
 
   :uberjar-name "homepage.jar"
 
-  :prep-tasks [["cljsbuild" "once" "min"]["garden" "once"] "compile"]
-  )
+  :prep-tasks [["cljsbuild" "once" "min"]["garden" "once"] "compile"])
