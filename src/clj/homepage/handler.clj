@@ -9,22 +9,25 @@
 (defn- send-front []
   (content-type (resource-response "index.html" {:root "public"}) "text/html; charset=utf-8"))
 
-(defroutes front-and-resource-routes
+(defroutes static-resource-routes
   ;; re-frame application
   (GET "/" [] (send-front))
   (GET "/about" [] (send-front))
   (GET "/contact" [] (send-front))
 
-  ;; static resources
   (resources "/"))
 
 (defroutes api-routes
   (POST "/send-message" [:as {h :headers b :body}]
         (let [recaptcha-token (get h "g-recaptcha-response")]
           (do
+            ;; TODO validate recaptcha-token
+
+            ;; send message to bot
+            ;; TODO parse result of bot and send back to frontend
             (send-message b)))))
 
 (def handler
   (routes
    (wrap-routes api-routes wrap-api-middleware)
-   (wrap-routes front-and-resource-routes wrap-front-middleware)))
+   (wrap-routes static-resource-routes wrap-front-middleware)))
