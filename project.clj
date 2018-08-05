@@ -8,6 +8,7 @@
                  [environ "1.1.0"]
                  [secretary "1.2.3"]
                  [garden "1.3.5"]
+                 [morse "0.4.0"]
                  [ns-tracker "0.3.1"]
                  [compojure "1.6.1"]
                  [soda-ash "0.81.1"]
