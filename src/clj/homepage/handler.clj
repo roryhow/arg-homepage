@@ -1,5 +1,5 @@
 (ns homepage.handler
-  (:require [compojure.core :refer [GET POST defroutes routes rfn]]
+  (:require [compojure.core :refer [GET POST wrap-routes defroutes routes rfn]]
             [compojure.route :refer [resources]]
             [ring.util.response :refer [resource-response content-type]]
             [ring.middleware.reload :refer [wrap-reload]]
@@ -26,5 +26,5 @@
 
 (def handler
   (routes
-   (wrap-api-middleware #'api-routes)
-   (wrap-front-middleware #'front-and-resource-routes)))
+   (wrap-routes api-routes wrap-api-middleware)
+   (wrap-routes front-and-resource-routes wrap-front-middleware)))
