@@ -1,5 +1,5 @@
 (ns homepage.middleware
-  (:require [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
+  (:require [ring.middleware.defaults :refer [site-defaults api-defaults wrap-defaults]]
             [ring.util.response :refer [response status]]
             [environ.core :refer [env]]
             [prone.middleware :refer [wrap-exceptions]]
@@ -20,12 +20,13 @@
 
 (defn wrap-front-middleware [handler]
   (-> handler
-      (wrap-defaults (assoc site-defaults :security false))
+      (wrap-defaults site-defaults)
       wrap-exceptions
       wrap-reload))
 
 (defn wrap-api-middleware [handler]
   (-> handler
+      (wrap-defaults api-defaults)
       wrap-auth
       wrap-json-body
       wrap-json-response

@@ -1,7 +1,7 @@
 (ns homepage.middleware
   (:require [environ.core :refer [env]]
             [ring.util.response :refer [response status]]
-            [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
+            [ring.middleware.defaults :refer [site-defaults api-defaults wrap-defaults]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]))
 
 (defn- authorized? [request]
@@ -21,6 +21,7 @@
 
 (defn wrap-api-middleware [handler]
   (-> handler
+      (wrap-defaults api-defaults)
       wrap-auth
       wrap-json-body
       wrap-json-response))

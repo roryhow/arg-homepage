@@ -25,5 +25,6 @@
             (send-message b)))))
 
 (def handler
-  (routes (wrap-front-middleware #'front-and-resource-routes)
-          (wrap-api-middleware #'api-routes)))
+  (routes
+   (wrap-api-middleware #'api-routes)
+   (wrap-front-middleware #'front-and-resource-routes)))
