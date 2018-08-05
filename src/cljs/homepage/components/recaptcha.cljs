@@ -4,8 +4,12 @@
             [re-frame.core :refer [dispatch subscribe]]))
 
 (defonce has-loaded (r/atom false))
+(defonce is-mounted (atom false))
 
-(defn ^:export onload [] (reset! has-loaded true))
+(defn ^:export onload []
+  (reset! has-loaded true)
+  ;; don't render if component isn't mounted yet
+  (when @is-mounted render-recaptcha))
 (defn ^:export data_callback [x] (dispatch [:homepage.events/set-recaptcha-response x]))
 (defn ^:export data_expired_callback [] (dispatch [:homepage.events/set-recaptcha-expired]))
 
@@ -18,7 +22,7 @@
   (let [api-loaded? @has-loaded]
     (r/create-class
      {:display-name "recaptcha"
-      :component-did-mount #(when api-loaded? (render-recaptcha))
+      :component-did-mount #(when api-loaded? (render-recaptcha) (reset! is-mounted true))
       :reagent-render
       (fn [] [sa/FormField {:style {:margin-bottom 0 }}
              [:div.g-recaptcha {:data-sitekey "6LeMcWUUAAAAAOSsfkGq0YQ1aiwEPkrpy_B77jhP"
