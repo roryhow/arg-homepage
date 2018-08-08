@@ -111,7 +111,7 @@
      :jar true
      :compiler     {:main            homepage.core
                     :output-to       "resources/public/js/compiled/app.js"
-                    :optimizations   :advanced
+                    :optimizations   :none
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}
     ]}
