@@ -49,9 +49,9 @@
           }]]
        [sa/FormField {:style {:display "flex" :flex-direction "row" :justify-content "space-between" }}
         [recaptcha]
-
         [sa/Button {:type "submit"
                     :disabled (nil? @recaptcha-token)
                     :negative (nil? @recaptcha-token)
-                    :positive (not (nil? @recaptcha-token))} (if (nil? @recaptcha-token) "Are you a bot, though?" "Send me a message!")]]
+                    :positive (not (nil? @recaptcha-token))}
+         (if (nil? @recaptcha-token) "Are you a bot, though?" "Send me a message!")]]
        ])))

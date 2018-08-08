@@ -18,7 +18,8 @@
   (swap! state assoc :has-loaded true)
   ;; don't render if component isn't mounted yet
   ;; (when (:is-mounted @state) render-recaptcha)
-  )
+  (println "onload!")
+  (render-recaptcha))
 
 (defn ^:export data_callback [x] (dispatch [:homepage.events/set-recaptcha-response x]))
 
@@ -28,7 +29,8 @@
      {:display-name "recaptcha"
       :component-did-mount
       #(do
-         (js/setTimeout render-recaptcha 5000)
+         (println "component did mount!")
+         (render-recaptcha)
          (swap! state assoc :is-mounted true))
       :reagent-render
       (fn [] [sa/FormField {:style {:margin-bottom 0 }}
