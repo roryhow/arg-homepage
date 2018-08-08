@@ -16,9 +16,9 @@
 
 (defn ^:export onload []
   (swap! state assoc :has-loaded true)
-  (print "loaded!")
   ;; don't render if component isn't mounted yet
-  (when (:is-mounted @state) render-recaptcha))
+  ;; (when (:is-mounted @state) render-recaptcha)
+  (render-recaptcha))
 
 (defn ^:export data_callback [x] (dispatch [:homepage.events/set-recaptcha-response x]))
 
@@ -29,7 +29,6 @@
       :component-did-mount
       #(do
          (render-recaptcha)
-         (print "mounted!")
          (swap! state assoc :is-mounted true))
       :reagent-render
       (fn [] [sa/FormField {:style {:margin-bottom 0 }}
