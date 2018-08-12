@@ -4,7 +4,7 @@
             [soda-ash.core :as sa]
             [re-frame.core :refer [dispatch subscribe]]))
 
-(defonce state (ra/atom {:has-loaded false :is-mounted false}))
+(def state (ra/atom {:has-loaded false :is-mounted false}))
 
 ;; when the recaptcha response is no longer valid
 (defn ^:export data_expired_callback [] (dispatch [:homepage.events/set-recaptcha-expired]))
@@ -25,6 +25,7 @@
     :component-did-update #(when (and (:is-mounted @state) (:has-loaded @state))
                              (render-recaptcha))
     :component-did-mount  #(swap! state assoc :is-mounted true)
+    :component-will-unmount #(swap! state assoc :is-mounted false)
     :reagent-render
     (fn [] (let [s @state] ;; subscribe to rerenders
             [sa/FormField {:style {:margin-bottom 0 }}
