@@ -64,7 +64,7 @@
                    [ring/ring-mock "0.3.2"]
                    [ring/ring-devel "1.6.3"]
                    [prone "1.6.0"]
-                   [cider/piggieback "0.3.6"]
+                   [cider/piggieback "0.3.8"]
                    [day8.re-frame/tracing "0.5.1"]
                    [day8.re-frame/re-frame-10x "0.3.3-react16"]]
 
@@ -111,7 +111,7 @@
      :jar true
      :compiler     {:main            homepage.core
                     :output-to       "resources/public/js/compiled/app.js"
-                    :optimizations   :simple
+                    :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
                     :pretty-print    false}}
     ]}
