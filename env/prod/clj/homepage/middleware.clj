@@ -20,7 +20,7 @@
 
 (defn wrap-api-middleware [handler]
   (-> handler
-      (wrap-defaults site-defaults)
+      (wrap-defaults api-defaults)
       wrap-auth
       wrap-json-body
       wrap-json-response))
