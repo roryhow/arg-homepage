@@ -13,15 +13,14 @@
   (fn [request]
     (if (authorized? request)
       (handler request)
-      (-> (response "Access Denied")
-          (status 403)))))
+      (status (response "Access Denied") 403))))
 
 (defn wrap-front-middleware [handler]
   (wrap-defaults handler site-defaults))
 
 (defn wrap-api-middleware [handler]
   (-> handler
-      (wrap-defaults api-defaults)
+      (wrap-defaults site-defaults)
       wrap-auth
       wrap-json-body
       wrap-json-response))
