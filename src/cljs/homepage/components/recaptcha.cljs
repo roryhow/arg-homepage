@@ -27,7 +27,7 @@
     :component-did-mount  #(swap! state assoc :is-mounted true)
     :component-will-unmount #(swap! state assoc :is-mounted false)
     :reagent-render
-    (fn [] (let [s @state] ;; subscribe to rerenders
+    (fn [] (let [_ @state] ;; subscribe to rerenders
             [sa/FormField {:style {:margin-bottom 0 }}
              [:div.g-recaptcha {:data-sitekey "6LeMcWUUAAAAAOSsfkGq0YQ1aiwEPkrpy_B77jhP"
                                 :data-callback "onDataCallback"
