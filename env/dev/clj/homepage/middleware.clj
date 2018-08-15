@@ -1,5 +1,6 @@
 (ns homepage.middleware
   (:require [ring.middleware.defaults :refer [site-defaults api-defaults wrap-defaults]]
+            [ring.middleware.anti-forgery :refer [wrap-anti-forgery]]
             [ring.util.response :refer [response status]]
             [environ.core :refer [env]]
             [prone.middleware :refer [wrap-exceptions]]
@@ -17,6 +18,14 @@
       (handler request)
       (status (response "Access Denied") 403))))
 
+(defn get-token
+  "gets the ring session cookie from request and returns nil if not found"
+  [req]
+  (-> req
+      (get-in [:headers "cookie"] "")
+      (clojure.string/split #"=")
+      (nth 1 nil)))
+
 (defn wrap-front-middleware [handler]
   (-> handler
       (wrap-defaults site-defaults)
@@ -25,7 +34,8 @@
 
 (defn wrap-api-middleware [handler]
   (-> handler
-      (wrap-defaults site-defaults)
+      (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))
+      (wrap-anti-forgery {:read-token get-token})
       wrap-auth
       wrap-json-body
       wrap-json-response

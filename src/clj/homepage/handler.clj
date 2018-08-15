@@ -22,10 +22,8 @@
         (let [recaptcha-token (get h "g-recaptcha-response")]
           (do
             ;; TODO validate recaptcha-token
-
-            ;; send message to bot
-            ;; TODO parse result of bot and send back to frontend
-            (send-message b)))))
+            (send-message b))))
+  )
 
 (def handler
   (routes
