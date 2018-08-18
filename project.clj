@@ -13,6 +13,7 @@
                  [compojure "1.6.1"]
                  [soda-ash "0.81.1"]
                  [cljs-http "0.1.45"]
+                 [clj-http "3.9.1"]
                  [hiccup "1.0.5"]
                  [venantius/accountant "0.2.4"]
                  [yogthos/config "1.1.1"]

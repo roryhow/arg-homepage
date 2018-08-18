@@ -20,12 +20,9 @@
 (defroutes api-routes
   (POST "/send-message" [:as {h :headers b :body}]
         (let [recaptcha-token (get h "g-recaptcha-response")]
-          (do
-            ;; TODO validate recaptcha-token
-            (send-message b))))
-  )
+          (send-message b))))
 
 (def handler
   (routes
    (wrap-routes api-routes wrap-api-middleware)
-   (wrap-routes static-resource-routes wrap-front-middleware)))
+   (wrap-routes static-resource-routes wrap-api-middleware)))

@@ -34,8 +34,7 @@
 
 (defn wrap-api-middleware [handler]
   (-> handler
-      (wrap-defaults (assoc-in site-defaults [:security :anti-forgery] false))
-      (wrap-anti-forgery {:read-token get-token})
+      (wrap-defaults api-defaults)
       wrap-auth
       wrap-json-body
       wrap-json-response
