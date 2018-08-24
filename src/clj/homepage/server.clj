@@ -7,4 +7,4 @@
 (defn -main [& args]
   (let [port (or (env :port) 3000)]
     (print (str "running on port: " port))
-    (run-jetty handler {:port port :join? false})))
+    (run-jetty handler {:port port :join? false :async? true})))

@@ -36,6 +36,8 @@
              :ring-handler homepage.handler/handler
              :server-logfile false}
 
+  :ring {:handler homepage.handler/handler :async? true}
+
   :garden {:builds [{:id           "screen"
                      :source-paths ["src/clj"]
                      :stylesheet   homepage.css/screen

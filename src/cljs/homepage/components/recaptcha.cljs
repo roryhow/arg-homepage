@@ -13,7 +13,7 @@
 (defn- render-recaptcha []
   (dispatch [:homepage.events/set-recaptcha-expired])
   (.render js/grecaptcha "g-recaptcha"
-           (clj->js :sitekey "6LeMcWUUAAAAAOSsfkGq0YQ1aiwEPkrpy_B77jhP")))
+           (clj->js :sitekey "6Ld3g04UAAAAAK9MG3lOIfH5nLXEe33P28jnA45G")))
 
 (defn ^:export onload [] (swap! state assoc :has-loaded true))
 
@@ -29,7 +29,7 @@
     :reagent-render
     (fn [] (let [_ @state] ;; subscribe to rerenders
             [sa/FormField {:style {:margin-bottom 0 }}
-             [:div.g-recaptcha {:data-sitekey "6LeMcWUUAAAAAOSsfkGq0YQ1aiwEPkrpy_B77jhP"
+             [:div.g-recaptcha {:data-sitekey "6Ld3g04UAAAAAK9MG3lOIfH5nLXEe33P28jnA45G"
                                 :data-callback "onDataCallback"
                                 :data-expired-callback "onExpiredCallback"
                                 :id "g-recaptcha"}]]))}))
