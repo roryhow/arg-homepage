@@ -15,6 +15,14 @@
       (handler request)
       (status (response "Access Denied") 403))))
 
+(defn get-token
+  "gets the ring session cookie from request and returns nil if not found"
+  [req]
+  (-> req
+      (get-in [:headers "cookie"] "")
+      (clojure.string/split #"=")
+      (nth 1 nil)))
+
 (defn wrap-front-middleware [handler]
   (wrap-defaults handler site-defaults))
 
