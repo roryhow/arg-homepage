@@ -10,6 +10,11 @@
 
 (defn send-front [] (content-type (resource-response "index.html" {:root "public"}) "text/html; charset=utf-8"))
 
+(defn what-is-my-ip [request respond raise]
+  (respond {:status 200
+            :headers {"Content-Type" "text/plain"}
+            :body (:remote-addr request)}))
+
 (defroutes static-resource-routes
   ;; re-frame application
   (GET "/" [] (send-front))
@@ -19,25 +24,20 @@
   (resources "/"))
 
 (defroutes api-routes
-
   (POST "/send-message" req
         (let [h (:headers req)
               b (:body req)
               ip(:remote-addr req)
-              recaptcha-token (get h "g-recaptcha-response")]
-          (client/post "https://www.google.com/recaptcha/api/siteverify"
-                       {:async? true
-                        :form-params {:secret (:recaptcha-secret env)
-                                      :response recaptcha-token
-                                      :remoteip ip }
-                        :as :json}
-                       (fn [{{success? :success} :body}]
-                         (send-message b)
-                         (response "alrighty then"))
-                       (fn [exception]
-                         (println "execption message is: " (.getMessage exception))
-                         (response "things went bad")))
-          (response "I guess the request is nonblocking"))))
+              recaptcha-token (get h "g-recaptcha-response")
+              {{success? :success} :body} (client/post "https://www.google.com/recaptcha/api/siteverify"
+                                                       {:form-params {:secret (:recaptcha-secret env)
+                                                                      :response recaptcha-token
+                                                                      :remoteip ip }
+                                                        :as :json})]
+          (when success? (send-message b))
+          (response (str "Was it a success? " success?))))
+
+  (GET "/my-ip" [] what-is-my-ip))
 
 (def handler
   (routes

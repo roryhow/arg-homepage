@@ -19,5 +19,5 @@
         message (get body "message")]
 
     ;; Forward to telegram
-    (t/send-text token chat-id {:parse_mode "Markdown" }
+    (t/send-text token chat-id {:parse_mode "Markdown"}
                  (construct-message first last email message))))
