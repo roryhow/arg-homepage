@@ -8,13 +8,13 @@
             [homepage.bot :refer [send-message]]
             [homepage.middleware :refer [wrap-front-middleware wrap-api-middleware]]))
 
-(def send-front (content-type (resource-response "index.html" {:root "public"}) "text/html; charset=utf-8"))
+(defn send-front [] (content-type (resource-response "index.html" {:root "public"}) "text/html; charset=utf-8"))
 
 (defroutes static-resource-routes
   ;; re-frame application
-  (GET "/" [] send-front)
-  (GET "/about" [] send-front)
-  (GET "/contact" [] send-front)
+  (GET "/" [] (send-front))
+  (GET "/about" [] (send-front))
+  (GET "/contact" [] (send-front))
 
   (resources "/"))
 
