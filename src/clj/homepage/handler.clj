@@ -34,8 +34,17 @@
                                                                       :response recaptcha-token
                                                                       :remoteip ip }
                                                         :as :json})]
-          (when success? (send-message b))
-          (response (str "Was it a success? " success?))))
+          (if success?
+            (do
+              (send-message b)
+              {:status 200
+               :headers {"Content-Type" "application/json"}
+               :body {:success true
+                      :message "Successfully authenticated"}})
+            {:status 403
+             :headers {"Content-Type" "application/json"}
+             :body {:success false
+                    :message "Failed recaptcha authentication"}})))
 
   (GET "/my-ip" [] what-is-my-ip))
 
