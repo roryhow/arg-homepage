@@ -3,6 +3,7 @@
   :url "http://www.roryhow.com"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.339"]
+                 [org.clojure/core.async "0.4.474"]
                  [reagent "0.8.1"]
                  [re-frame "0.10.5"]
                  [environ "1.1.0"]
@@ -15,6 +16,7 @@
                  [cljs-http "0.1.45"]
                  [clj-http "3.9.1"]
                  [hiccup "1.0.5"]
+                 [cljsjs/react-modal "3.4.4-1"]
                  [venantius/accountant "0.2.4"]
                  [yogthos/config "1.1.1"]
                  [ring/ring-defaults "0.3.2"]

@@ -2,20 +2,29 @@
   (:require-macros [cljs.core.async.macros :refer [go]]
                    [homepage.env :refer [api-key]])
   (:require [reagent.core :as r]
-            [re-frame.core :refer [subscribe]]
+            [re-frame.core :refer [subscribe dispatch]]
             [cljs-http.client :as http]
             [soda-ash.core :as sa]
+            [homepage.components.modal :refer [modal]]
             [homepage.components.recaptcha :refer [recaptcha]]
             [homepage.utils :refer [clj->json]]))
 
+
 (defn form-submit [content token]
-  (http/post "/send-message" {:json-params content
-                              :headers {"g-recaptcha-response" token
-                                        "api-key" (api-key)}}))
+  ;; when we take a response from the HTTP request, run the following logic
+  ;; the http/post returns a channel, and we are listening for the response
+  ;; to be put there
+  (go (let [response (<! (http/post "/send-message" {:json-params content
+                                                     :headers {"g-recaptcha-response" token
+                                                               "api-key" (api-key)}}))]
+        (if (= (:status response) 200)
+          (dispatch [:homepage.events/set-form-submitted])
+          (println response)))))
 
 (defn contact-panel []
   (let [content (r/atom {:firstname "" :lastname "" :email "" :message ""})
-        recaptcha-token (subscribe [:homepage.subs/recaptcha-token])]
+        recaptcha-token (subscribe [:homepage.subs/recaptcha-token])
+        is-submitted? (subscribe [:homepage.subs/form-submitted?])]
     (fn []
       [sa/Form {:onSubmit #(form-submit @content @recaptcha-token) :method "POST"}
        [sa/FormGroup {:widths "equal"}
@@ -54,4 +63,6 @@
                     :negative (nil? @recaptcha-token)
                     :positive (not (nil? @recaptcha-token))}
          (if (nil? @recaptcha-token) "Are you a bot, though?" "Send me a message!")]]
+
+       [modal @is-submitted?]
        ])))

@@ -23,3 +23,9 @@
  ::set-recaptcha-expired
  (fn-traced [db _]
             (assoc db :recaptcha-token nil)))
+
+
+(re-frame/reg-event-db
+ ::set-form-submitted
+ (fn-traced [db _]
+            (assoc db :form-submitted? true)))

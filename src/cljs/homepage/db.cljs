@@ -2,4 +2,5 @@
 
 (def default-db
   {:name "re-frame"
-   :recaptcha-token nil})
+   :recaptcha-token nil
+   :form-submitted? false})

@@ -16,3 +16,8 @@
  ::recaptcha-token
  (fn [db]
    (:recaptcha-token db)))
+
+(re-frame/reg-sub
+ ::form-submitted?
+ (fn [db]
+   (:form-submitted? db)))
