@@ -3,7 +3,7 @@
   :url "http://www.roryhow.com"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.10.339"]
-                 [org.clojure/core.async "0.4.474"]
+                 [org.clojure/core.async "0.3.465"]
                  [reagent "0.8.1"]
                  [re-frame "0.10.5"]
                  [environ "1.1.0"]
