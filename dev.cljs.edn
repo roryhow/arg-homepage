@@ -1,0 +1,2 @@
+{:main homepage.core
+ :on-jsload "homepage.core/mount-root"}

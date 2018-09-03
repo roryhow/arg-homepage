@@ -1,4 +1,4 @@
-(defproject homepage "0.1.0-SNAPSHOT"
+(defproject homepage "0.2.0"
   :description "Rory How homepage"
   :url "http://www.roryhow.com"
   :dependencies [[org.clojure/clojure "1.9.0"]
@@ -27,32 +27,17 @@
             [lein-environ "1.1.0"]
             [lein-garden "0.2.8"]]
 
-  :min-lein-version "2.5.3"
+  :min-lein-version "2.7.1"
 
-  :source-paths ["src/clj"]
+  :source-paths ["src/clj" "src/cljs"]
+  :resource-paths ["target" "resources"]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"
                                     "resources/public/css"]
 
-  :figwheel {:css-dirs ["resources/public/css"]
-             :ring-handler homepage.handler/handler
-             :server-logfile false}
-
-  :garden {:builds [{:id           "screen"
-                     :source-paths ["src/clj"]
-                     :stylesheet   homepage.css/screen
-                     :compiler     {:output-to     "resources/public/css/screen.css"
-                                    :pretty-print? true}}]}
-
-  :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
-
-  :aliases {"dev" ["do" "clean"
-                   ["pdo" ["figwheel" "dev"]
-                    ["garden" "auto"]]]
-            "build" ["with-profile" "+prod,-dev" "do"
-                     ["clean"]
-                     ["cljsbuild" "once" "min"]
-                     ["garden" "once"]]}
+  :aliases {"fig"   ["trampoline" "run" "-m" "figwheel.main"]
+            "build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
+            "min"   ["run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]}
 
   :profiles
   {:dev [:project/dev :profiles/dev]
@@ -67,22 +52,13 @@
                    [ring/ring-mock "0.3.2"]
                    [ring/ring-devel "1.6.3"]
                    [prone "1.6.0"]
-                   [cider/piggieback "0.3.8"]
+                   [cider/piggieback "0.3.9"]
                    [day8.re-frame/tracing "0.5.1"]
-                   [day8.re-frame/re-frame-10x "0.3.3-react16"]]
-
-    :plugins      [[lein-figwheel "0.5.16"]
-                   [lein-pdo "0.1.1"]]
+                   [day8.re-frame/re-frame-10x "0.3.3-react16"]
+                   [com.bhauman/figwheel-main "0.1.8"]
+                   [com.bhauman/rebel-readline-cljs "0.1.4"]]
+    :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
     :source-paths ["env/dev/clj"]}
-
-   ;; prod env
-   :profiles/prod {}
-   :project/prod
-   {:source-paths ["env/prod/clj"]
-    :prep-tasks ["compile" ["cljsbuild" "once" "min"]]
-    :dependencies [[day8.re-frame/tracing-stubs "0.5.1"]]
-    :aot :all
-    :omit-source true }
 
    ;; heroku env
    :profiles/uberjar {}
@@ -95,29 +71,14 @@
 
   :cljsbuild
   {:builds
-   [{:id           "dev"
-     :source-paths ["src/cljs" "env/dev/cljs"]
-     :figwheel     {:on-jsload "homepage.core/mount-root"}
-     :compiler     {:main                 homepage.core
-                    :output-to            "resources/public/js/compiled/app.js"
-                    :output-dir           "resources/public/js/compiled/out"
-                    :asset-path           "js/compiled/out"
-                    :source-map-timestamp true
-                    :closure-defines      {"re_frame.trace.trace_enabled_QMARK_" true
-                                           "day8.re_frame.tracing.trace_enabled_QMARK_"  true}
-                    :preloads             [devtools.preload day8.re-frame-10x.preload]
-                    :external-config      {:devtools/config {:features-to-install :all}}
-                    }}
-
-    {:id           "min"
+   [{:id           "min"
      :source-paths ["src/cljs" "env/prod/cljs"]
      :jar true
      :compiler     {:main            homepage.core
-                    :output-to       "resources/public/js/compiled/app.js"
+                    :output-to       "target/public/js/compiled/app.js"
                     :optimizations   :advanced
                     :closure-defines {goog.DEBUG false}
-                    :pretty-print    false}}
-    ]}
+                    :pretty-print    false}}]}
 
   :main homepage.server
 
