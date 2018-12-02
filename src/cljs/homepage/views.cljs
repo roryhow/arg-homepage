@@ -21,7 +21,7 @@
 ;; Wrap the panel in a nav
 (defn show-panel [panel-name]
   [:div
-   [nav-bar panel-name]
+   ;; [nav-bar panel-name]
    [panels panel-name]
    ])
 
