@@ -1,5 +1,4 @@
-(ns homepage.views.about
-  (:require [soda-ash.core :as sa]))
+(ns homepage.views.about)
 
 (defn about-panel []
   [:div

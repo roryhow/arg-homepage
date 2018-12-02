@@ -1,7 +1,7 @@
 (ns homepage.components.recaptcha
   (:require [reagent.core :as r]
             [reagent.ratom :as ra]
-            [soda-ash.core :as sa]
+            ;; [soda-ash.core :as sa]
             [re-frame.core :refer [dispatch subscribe]]))
 
 (def state (ra/atom {:has-loaded false :is-mounted false}))
@@ -28,7 +28,7 @@
     :component-will-unmount #(swap! state assoc :is-mounted false)
     :reagent-render
     (fn [] (let [_ @state] ;; subscribe to rerenders
-            [sa/FormField {:style {:margin-bottom 0 }}
+            [:div {:style {:margin-bottom 0 }}
              [:div.g-recaptcha {:data-sitekey "6Ld3g04UAAAAAK9MG3lOIfH5nLXEe33P28jnA45G"
                                 :data-callback "onDataCallback"
                                 :data-expired-callback "onExpiredCallback"

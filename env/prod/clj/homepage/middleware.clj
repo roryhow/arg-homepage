@@ -24,7 +24,8 @@
       (nth 1 nil)))
 
 (defn wrap-front-middleware [handler]
-  (wrap-defaults handler site-defaults))
+  (-> handler
+      (wrap-defaults site-defaults)))
 
 (defn wrap-api-middleware [handler]
   (-> handler
