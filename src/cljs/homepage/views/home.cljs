@@ -17,7 +17,7 @@
 
 
 (defn self-image []
-  [:img {:src "/asset/me.jpeg"}])
+  [:img {:src "/assets/me.jpeg"}])
 
 ;; home
 (defn home-panel []
