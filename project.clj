@@ -21,6 +21,7 @@
                  [yogthos/config "1.1.1"]
                  [ring/ring-defaults "0.3.2"]
                  [ring/ring-json "0.4.0"]
+                 [bk/ring-gzip "0.3.0"]
                  [ring "1.6.3"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
