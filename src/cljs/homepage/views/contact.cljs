@@ -4,15 +4,16 @@
   (:require [reagent.core :as r]
             [re-frame.core :refer [subscribe dispatch]]
             [cljs-http.client :as http]
-            [homepage.components.modal :refer [modal]]
             [homepage.components.recaptcha :refer [recaptcha]]
             [homepage.utils :refer [clj->json]]))
 
 
-(defn form-submit [content token]
+(defn form-submit [e content token]
   ;; when we take a response from the HTTP request, run the following logic
   ;; the http/post returns a channel, and we are listening for the response
   ;; to be put there
+  (print "submitting form...")
+  (.preventDefault e)
   (go (let [response (<! (http/post "/send-message" {:json-params content
                                                      :headers {"g-recaptcha-response" token
                                                                "api-key" (api-key)}}))]
@@ -25,7 +26,7 @@
         recaptcha-token (subscribe [:homepage.subs/recaptcha-token])]
     (fn []
       [:section {:className "section"}
-       [:form {:className "form"}
+       [:form {:className "form" :onSubmit #(form-submit % @content @recaptcha-token)}
         [:div {:className "field is-horizontal"}
          [:div {:className "field-body"}
           [:div {:className "field"}
@@ -58,5 +59,5 @@
           [:button {:className (if @recaptcha-token "button is-dark" "button is-danger")
                     :style {:height "74px" :width "304px"}
                     :disabled (nil? @recaptcha-token)
-                    :on-click #(do (.preventDefault %) (print @content))}
+                    :type "submit"}
            (if @recaptcha-token "Send the message!" "Do the recaptcha u bot")]]]]])))

@@ -5,19 +5,18 @@
 (def ^:private token (:telegram-token env))
 (def ^:private chat-id (:chat-id env))
 
-(defn- construct-message [first last email message]
-  (str first " " last ":\n "
-       "**" email "**\n"
-       message))
+(defn- construct-message [name email message]
+  (str "Name: " name ":\n"
+       "Email: " email "\n"
+       "Message: " message))
 
 (defn send-message
   "Receives a map of body properties, sends data to telegram"
   [body]
-  (let [first (get body "firstname")
-        last (get body "lastname")
+  (let [name (get body "name")
         email (get body "email")
         message (get body "message")]
 
     ;; Forward to telegram
     (t/send-text token chat-id {:parse_mode "Markdown"}
-                 (construct-message first last email message))))
+                 (construct-message name email message))))

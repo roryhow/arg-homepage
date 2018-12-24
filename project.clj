@@ -23,8 +23,7 @@
                  [ring "1.6.3"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
-            [lein-environ "1.1.0"]
-            [lein-garden "0.2.8"]]
+            [lein-environ "1.1.0"]]
 
   :min-lein-version "2.5.3"
 
@@ -37,18 +36,11 @@
              :ring-handler homepage.handler/handler
              :server-logfile false}
 
-  :garden {:builds [{:id           "screen"
-                     :source-paths ["src/clj"]
-                     :stylesheet   homepage.css/screen
-                     :compiler     {:output-to     "resources/public/css/screen.css"
-                                    :pretty-print? true}}]}
-
   :aliases {"dev" ["do" "clean"
                    ["repl" ":headless" ":port" "50766"]]
             "build" ["with-profile" "+prod,-dev" "do"
                      ["clean"]
-                     ["cljsbuild" "once" "min"]
-                     ["garden" "once"]]}
+                     ["cljsbuild" "once" "min"]]}
 
   :profiles
   {:dev [:project/dev :profiles/dev]
@@ -129,4 +121,4 @@
 
   :uberjar-name "homepage.jar"
 
-  :prep-tasks [["cljsbuild" "once" "min"]["garden" "once"] "compile"])
+  :prep-tasks [["cljsbuild" "once" "min"] "compile"])

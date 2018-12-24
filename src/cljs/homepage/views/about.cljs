@@ -15,4 +15,4 @@
     [:a {:href "https://twitter.com/argwick" :target "_blank"} "Twitter"]
     [:p {:style {:display "inline"}} "."]]
    [:div {:className "content is-medium"}
-    [:p "If you want to contact me, you can do so by filling in the below form (you don't need to give me a real address but if you want me to get back to you I'd recommend it), or you can email me directly at my email - me@rory.how>"]]])
+    [:p "If you want to contact me, you can do so by filling in the below form (you don't need to give me a real address but if you want me to get back to you I'd recommend it), or you can email me directly at my email - me@rory.how"]]])

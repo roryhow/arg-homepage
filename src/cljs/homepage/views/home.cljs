@@ -3,6 +3,7 @@
    [re-frame.core :as re-frame]
    [reagent.core :as r]
    [homepage.subs :as subs]
+   [re-frame.core :refer [subscribe dispatch]]
    [homepage.views.about :refer [about-panel]]
    [homepage.views.contact :refer [contact-panel]]
    [accountant.core :refer [navigate!]]))
@@ -23,10 +24,18 @@
       [:h1 {:className "title"} "Hi! My name is Rory."]
       [:h2 {:className "subtitle"} "Thanks for coming here. Feel free to look through some of the things I've made and leave a message for me."]]]]])
 
+(defn- thanks-banner []
+  [:section {:className "hero is-small is-success is-bold"
+             :style {:margin-top "30px"}}
+   [:div {:className "hero-body"}
+    [:div {:className "container"}
+     [:h1 {:className "title"} "Thanks for the message!"]
+     [:h2 {:className "subtitle"} "I'll get back to you soon."]]]])
+
 ;; home
 (defn home-panel []
-  [:div
-   [hero]
-   [about-panel]
-   [contact-panel]
-   ])
+  (let [form-submitted? (subscribe [:homepage.subs/form-submitted?])]
+    [:div
+     [hero]
+     [about-panel]
+     (if @form-submitted? [thanks-banner] [contact-panel])]))

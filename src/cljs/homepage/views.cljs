@@ -2,7 +2,6 @@
   (:require
    [re-frame.core :as re-frame]
    [homepage.subs :as subs]
-   [homepage.components.nav :refer [nav-bar]]
    [homepage.views.home :refer [home-panel]]
    [homepage.views.about :refer [about-panel]]
    [homepage.views.contact :refer [contact-panel]]
@@ -20,7 +19,6 @@
 ;; Wrap the panel in a nav
 (defn show-panel [panel-name]
   [:div
-   ;; [nav-bar panel-name]
    [panels panel-name]
    ])
 
