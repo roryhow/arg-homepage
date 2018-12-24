@@ -1,7 +1,6 @@
 (ns homepage.views
   (:require
    [re-frame.core :as re-frame]
-   ;; [soda-ash.core :as sa]
    [homepage.subs :as subs]
    [homepage.components.nav :refer [nav-bar]]
    [homepage.views.home :refer [home-panel]]
@@ -25,6 +24,8 @@
    [panels panel-name]
    ])
 
-(defn main-panel []
-  (let [active-panel (re-frame/subscribe [::subs/active-panel])]
-    [show-panel @active-panel]))
+;; (defn main-panel []
+;;   (let [active-panel (re-frame/subscribe [::subs/active-panel])]
+;;     [show-panel @active-panel]))
+
+(defn main-panel [] [home-panel])

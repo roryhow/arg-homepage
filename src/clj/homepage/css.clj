@@ -5,4 +5,6 @@
             [homepage.styles.home :refer [home]]
             ))
 
-(defstyles screen [site nav home])
+;; (defstyles screen [site nav home])
+
+(defstyles screen [])
