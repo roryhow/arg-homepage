@@ -42,7 +42,7 @@
              [:i {:className "fas fa-envelope"}]]
             [:input {:className "input"
                      :placeholder "maurice.moss@reynolmindustries.co.uk"
-                     :on-change #(swap! content assoc :emailname (-> % .-target .-value))}]]]]]
+                     :on-change #(swap! content assoc :email (-> % .-target .-value))}]]]]]
         [:div {:className "field"}
          [:label {:className "label"} "Message"]
          [:div {:className "control"}
