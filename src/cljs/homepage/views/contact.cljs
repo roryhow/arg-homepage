@@ -12,14 +12,12 @@
   ;; when we take a response from the HTTP request, run the following logic
   ;; the http/post returns a channel, and we are listening for the response
   ;; to be put there
-  (print "submitting form...")
   (.preventDefault e)
   (go (let [response (<! (http/post "/send-message" {:json-params content
                                                      :headers {"g-recaptcha-response" token
                                                                "api-key" (api-key)}}))]
         (if (= (:status response) 200)
-          (dispatch [:homepage.events/set-form-submitted])
-          (println response)))))
+          (dispatch [:homepage.events/set-form-submitted])))))
 
 (defn contact-panel []
   (let [content (r/atom {:name "" :email "" :message ""})
