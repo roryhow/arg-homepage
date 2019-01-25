@@ -2,7 +2,7 @@
 
 (defn about-panel []
   [:section {:className "section" :style {:padding-bottom "0"}}
-   [:div {:className "content is-medium"}
+   [:div {:className "container content is-medium"}
     [:p {:style {:display "inline"}} "I'm a full-stack software developer from the UK, currently living in Finland, working at "]
     [:a {:href "https://futurice.com" :target "_blank"} "Futurice"]
     [:p {:style {:display "inline"}} " and studying for a Computer Science Masters at "]
@@ -14,5 +14,5 @@
     [:p {:style {:display "inline"}} ". I also ramble occasionally on "]
     [:a {:href "https://twitter.com/argwick" :target "_blank"} "Twitter"]
     [:p {:style {:display "inline"}} "."]]
-   [:div {:className "content is-medium"}
+   [:div {:className "container content is-medium"}
     [:p "If you want to contact me, you can do so by filling in the below form (you don't need to give me a real address but if you want me to get back to you I'd recommend it), or you can email me directly at my email - me@rory.how"]]])

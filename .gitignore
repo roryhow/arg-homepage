@@ -9,3 +9,5 @@ out
 *.css
 profiles.clj
 .lein-env
+.lein-repl-history
+.rebel_readline_history

@@ -18,9 +18,7 @@
 
 ;; Wrap the panel in a nav
 (defn show-panel [panel-name]
-  [:div
-   [panels panel-name]
-   ])
+  [:div [panels panel-name]])
 
 ;; (defn main-panel []
 ;;   (let [active-panel (re-frame/subscribe [::subs/active-panel])]

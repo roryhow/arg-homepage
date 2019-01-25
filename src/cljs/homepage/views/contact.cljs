@@ -24,22 +24,18 @@
         recaptcha-token (subscribe [:homepage.subs/recaptcha-token])]
     (fn []
       [:section {:className "section"}
-       [:form {:className "form" :onSubmit #(form-submit % @content @recaptcha-token)}
+       [:form {:className "container form" :onSubmit #(form-submit % @content @recaptcha-token)}
         [:div {:className "field is-horizontal"}
          [:div {:className "field-body"}
           [:div {:className "field"}
            [:label {:className "label"} "Name"]
-           [:div {:className "control has-icons-left is-expanded"}
-            [:span {:className "icon is-small is-left"}
-             [:i {:className "fas fa-user"}]]
+           [:div {:className "control is-expanded"}
             [:input {:className "input"
                      :placeholder "Maurice Moss"
                      :on-change #(swap! content assoc :name (-> % .-target .-value))}]]]
           [:div {:className "field"}
            [:label {:className "label"} "Email"]
-           [:div {:className "control has-icons-left is-expanded"}
-            [:span {:className "icon is-small is-left"}
-             [:i {:className "fas fa-envelope"}]]
+           [:div {:className "control is-expanded"}
             [:input {:className "input"
                      :placeholder "maurice.moss@reynolmindustries.co.uk"
                      :on-change #(swap! content assoc :email (-> % .-target .-value))}]]]]]
@@ -49,7 +45,7 @@
           [:textarea {:on-change #(swap! content assoc :message (-> % .-target .-value))
                       :className "textarea"
                       :rows "5"
-                      :placeholder "Please, let me offer you this well-paying job"
+                      :placeholder "What would you like to say?"
                       }]]]
         [:div {:className "level"}
          [:div {:className "level-left"} [recaptcha]]

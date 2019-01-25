@@ -1,14 +1,14 @@
 (defproject homepage "0.1.0-SNAPSHOT"
   :description "Rory How homepage"
   :url "http://www.roryhow.com"
-  :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.10.339"]
-                 [org.clojure/core.async "0.3.465"]
+  :dependencies [[org.clojure/clojure "1.10.0"]
+                 [org.clojure/clojurescript "1.10.439"]
+                 [org.clojure/core.async "0.4.490"]
                  [reagent "0.8.1"]
-                 [re-frame "0.10.5"]
+                 [re-frame "0.10.6"]
                  [environ "1.1.0"]
                  [secretary "1.2.3"]
-                 ;; [garden "1.3.5"]
+                 [org.roman01la/cljss "1.6.3"]
                  [morse "0.4.0"]
                  [ns-tracker "0.3.1"]
                  [compojure "1.6.1"]
@@ -20,7 +20,7 @@
                  [ring/ring-defaults "0.3.2"]
                  [ring/ring-json "0.4.0"]
                  [bk/ring-gzip "0.3.0"]
-                 [ring "1.6.3"]]
+                 [ring "1.7.1"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-environ "1.1.0"]]
@@ -51,13 +51,13 @@
    :profiles/dev {}
    :project/dev
    {:dependencies [[binaryage/devtools "0.9.10"]
-                   [figwheel-sidecar "0.5.16"]
+                   [figwheel-sidecar "0.5.18"]
                    [ring/ring-mock "0.3.2"]
-                   [ring/ring-devel "1.6.3"]
-                   [prone "1.6.0"]
+                   [ring/ring-devel "1.7.1"]
+                   [prone "1.6.1"]
                    [cider/piggieback "0.3.10"]
                    [day8.re-frame/tracing "0.5.1"]
-                   [day8.re-frame/re-frame-10x "0.3.3-react16"]]
+                   [day8.re-frame/re-frame-10x "0.3.6"]]
 
     :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]
                    :init (do (use 'figwheel-sidecar.repl-api)

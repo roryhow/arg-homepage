@@ -1,5 +1,6 @@
 (ns homepage.views.home
-  (:require ;; [soda-ash.core :as sa]
+  (:require
+   ;;[cljss.core :refer [defstyles;]]
    [re-frame.core :as re-frame]
    [reagent.core :as r]
    [homepage.subs :as subs]
@@ -16,7 +17,7 @@
 ;; hero
 (defn hero []
   [:section {:className "hero is-small is-dark is-bold"}
-   [:div {:className "hero-body"}
+   [:div {:className "container hero-body"}
     [:div {:className "container columns is-desktop"}
      [:div {:className "column"}
       [self-image]]
@@ -24,10 +25,12 @@
       [:h1 {:className "title"} "Hi! My name is Rory."]
       [:h2 {:className "subtitle"} "Thanks for coming here. Feel free to look through some of the things I've made and leave a message for me."]]]]])
 
+;; (defstyles banner [] {:background-color "green"})
+
 (defn- thanks-banner []
   [:section {:className "hero is-small is-success is-bold"
              :style {:margin-top "30px"}}
-   [:div {:className "hero-body"}
+   [:div {:className "container hero-body"}
     [:div {:className "container"}
      [:h1 {:className "title"} "Thanks for the message!"]
      [:h2 {:className "subtitle"} "I'll get back to you soon."]]]])
