@@ -1,9 +1,7 @@
 (ns homepage.views
   (:require
    [re-frame.core :as re-frame]
-   [soda-ash.core :as sa]
    [homepage.subs :as subs]
-   [homepage.components.nav :refer [nav-bar]]
    [homepage.views.home :refer [home-panel]]
    [homepage.views.about :refer [about-panel]]
    [homepage.views.contact :refer [contact-panel]]
@@ -20,11 +18,10 @@
 
 ;; Wrap the panel in a nav
 (defn show-panel [panel-name]
-  [sa/Container
-   [nav-bar panel-name]
-   [panels panel-name]
-   ])
+  [:div [panels panel-name]])
 
-(defn main-panel []
-  (let [active-panel (re-frame/subscribe [::subs/active-panel])]
-    [show-panel @active-panel]))
+;; (defn main-panel []
+;;   (let [active-panel (re-frame/subscribe [::subs/active-panel])]
+;;     [show-panel @active-panel]))
+
+(defn main-panel [] [home-panel])

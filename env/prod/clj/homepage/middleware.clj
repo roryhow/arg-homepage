@@ -1,5 +1,6 @@
 (ns homepage.middleware
   (:require [environ.core :refer [env]]
+            [ring.middleware.gzip :refer [wrap-gzip]]
             [ring.util.response :refer [response status]]
             [ring.middleware.defaults :refer [site-defaults api-defaults wrap-defaults]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]))
@@ -24,7 +25,9 @@
       (nth 1 nil)))
 
 (defn wrap-front-middleware [handler]
-  (wrap-defaults handler site-defaults))
+  (-> handler
+      (wrap-defaults site-defaults)
+      (wrap-gzip)))
 
 (defn wrap-api-middleware [handler]
   (-> handler
