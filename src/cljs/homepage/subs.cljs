@@ -11,3 +11,13 @@
  ::active-panel
  (fn [db _]
    (:active-panel db)))
+
+(re-frame/reg-sub
+ ::recaptcha-token
+ (fn [db]
+   (:recaptcha-token db)))
+
+(re-frame/reg-sub
+ ::form-submitted?
+ (fn [db]
+   (:form-submitted? db)))

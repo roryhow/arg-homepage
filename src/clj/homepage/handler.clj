@@ -1,23 +1,54 @@
 (ns homepage.handler
-  (:require [compojure.core :refer [GET POST defroutes rfn]]
+  (:require [compojure.core :refer [GET POST wrap-routes defroutes routes rfn]]
             [compojure.route :refer [resources]]
-            [ring.util.response :refer [resource-response]]
+            [clj-http.client :as client]
+            [environ.core :refer [env]]
+            [ring.util.response :refer [resource-response content-type response]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [homepage.bot :refer [send-message]]))
+            [homepage.bot :refer [send-message]]
+            [homepage.middleware :refer [wrap-front-middleware wrap-api-middleware]]))
 
-(defroutes routes
+(defn send-front [] (content-type (resource-response "index.html" {:root "public"}) "text/html; charset=utf-8"))
+
+(defn what-is-my-ip [request respond raise]
+  (respond {:status 200
+            :headers {"Content-Type" "text/plain"}
+            :body (:remote-addr request)}))
+
+(defroutes static-resource-routes
   ;; re-frame application
-  (GET "/" [] (resource-response "index.html" {:root "public"}))
+  (GET "/" [] (send-front))
+  (GET "/about" [] (send-front))
+  (GET "/contact" [] (send-front))
 
-  ;; API
-  (POST "/send-message" req (send-message req))
-
-  ;; send the site as a fallback for everything
-  (rfn [] (resource-response "index.html" {:root "public"}))
-
-  ;; static resources
   (resources "/"))
 
-(def dev-handler (-> #'routes wrap-reload))
+(defroutes api-routes
+  (POST "/send-message" req
+        (let [h (:headers req)
+              b (:body req)
+              ip(:remote-addr req)
+              recaptcha-token (get h "g-recaptcha-response")
+              {{success? :success} :body} (client/post "https://www.google.com/recaptcha/api/siteverify"
+                                                       {:form-params {:secret (:recaptcha-secret env)
+                                                                      :response recaptcha-token
+                                                                      :remoteip ip }
+                                                        :as :json})]
+          (if success?
+            (do
+              (send-message b)
+              {:status 200
+               :headers {"Content-Type" "application/json"}
+               :body {:success true
+                      :message "Successfully authenticated"}})
+            {:status 403
+             :headers {"Content-Type" "application/json"}
+             :body {:success false
+                    :message "Failed recaptcha authentication"}})))
 
-(def handler routes)
+  (GET "/my-ip" [] what-is-my-ip))
+
+(def handler
+  (routes
+   (wrap-routes api-routes wrap-api-middleware)
+   (wrap-routes static-resource-routes wrap-front-middleware)))

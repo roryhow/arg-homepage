@@ -1,22 +1,44 @@
 (ns homepage.views.home
-  (:require [soda-ash.core :as sa]
-            [re-frame.core :as re-frame]
-            [reagent.core :as r]
-            [homepage.subs :as subs]
-            [accountant.core :refer [navigate!]]))
+  (:require
+   ;;[cljss.core :refer [defstyles;]]
+   [re-frame.core :as re-frame]
+   [reagent.core :as r]
+   [homepage.subs :as subs]
+   [re-frame.core :refer [subscribe dispatch]]
+   [homepage.views.about :refer [about-panel]]
+   [homepage.views.contact :refer [contact-panel]]
+   [accountant.core :refer [navigate!]]))
 
 (defn self-image []
-  (let [revealed? (r/atom false)]
-    (fn []
-      (js/setTimeout #(reset! revealed? true) 1000)
-      [sa/Reveal {:animated "rotate" :instant false :active @revealed?}
-       [sa/RevealContent {:hidden true}
-        [sa/Image {:src "/assets/me.jpeg" :size "medium" :circular true }]]
-       [sa/RevealContent {:visible true}
-        [sa/Image {:src "/assets/square-image.png" :size "medium" :circular true }]]])))
+  [:figure {:className "image is-128x128" :style {:margin "auto"}}
+   [:img {:src "/assets/me.jpeg" :className "is-rounded"}]])
+
+
+;; hero
+(defn hero []
+  [:section {:className "hero is-small is-dark is-bold"}
+   [:div {:className "container hero-body"}
+    [:div {:className "container columns is-desktop"}
+     [:div {:className "column"}
+      [self-image]]
+     [:div {:className "column is-full"}
+      [:h1 {:className "title"} "Hi! My name is Rory."]
+      [:h2 {:className "subtitle"} "Thanks for coming here. Feel free to look through some of the things I've made and leave a message for me."]]]]])
+
+;; (defstyles banner [] {:background-color "green"})
+
+(defn- thanks-banner []
+  [:section {:className "hero is-small is-success is-bold"
+             :style {:margin-top "30px"}}
+   [:div {:className "container hero-body"}
+    [:div {:className "container"}
+     [:h1 {:className "title"} "Thanks for the message!"]
+     [:h2 {:className "subtitle"} "I'll get back to you soon."]]]])
 
 ;; home
 (defn home-panel []
-[sa/Container {:className "home-panel"}
- [:h1 "Hi there! I'm Rory."]
- [self-image]])
+  (let [form-submitted? (subscribe [:homepage.subs/form-submitted?])]
+    [:div
+     [hero]
+     [about-panel]
+     (if @form-submitted? [thanks-banner] [contact-panel])]))

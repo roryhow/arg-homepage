@@ -1,0 +1,15 @@
+# docker build -t homepage-dev -f Dockerfile.dev .
+# docker run -it --rm --name homepage homepage-dev
+
+FROM clojure:lein-2.8.1
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY project.clj /usr/src/app/
+RUN lein deps
+COPY . /usr/src/app
+
+EXPOSE 3449
+EXPOSE 7888
+
+CMD ["lein", "dev"]

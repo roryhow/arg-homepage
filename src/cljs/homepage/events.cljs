@@ -1,15 +1,31 @@
 (ns homepage.events
   (:require
    [re-frame.core :as re-frame]
-   [homepage.db :as db]
-   ))
+   [day8.re-frame.tracing :refer-macros [fn-traced]]
+   [homepage.db :as db]))
 
 (re-frame/reg-event-db
  ::initialize-db
- (fn [_ _]
-   db/default-db))
+ (fn-traced [_ _]
+            db/default-db))
 
 (re-frame/reg-event-db
  ::set-active-panel
- (fn [db [_ active-panel]]
-   (assoc db :active-panel active-panel)))
+ (fn-traced [db [_ active-panel]]
+            (assoc db :active-panel active-panel)))
+
+(re-frame/reg-event-db
+ ::set-recaptcha-response
+ (fn-traced [db  [_ token]]
+            (assoc db :recaptcha-token token)))
+
+(re-frame/reg-event-db
+ ::set-recaptcha-expired
+ (fn-traced [db _]
+            (assoc db :recaptcha-token nil)))
+
+
+(re-frame/reg-event-db
+ ::set-form-submitted
+ (fn-traced [db _]
+            (assoc db :form-submitted? true)))
