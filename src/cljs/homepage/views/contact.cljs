@@ -45,7 +45,7 @@
           [:textarea {:on-change #(swap! content assoc :message (-> % .-target .-value))
                       :className "textarea"
                       :rows "5"
-                      :placeholder "What would you like to say?"
+                      :placeholder "Wow your site is just the best"
                       }]]]
         [:div {:className "level"}
          [:div {:className "level-left"} [recaptcha]]

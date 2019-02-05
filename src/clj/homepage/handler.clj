@@ -29,11 +29,12 @@
               b (:body req)
               ip(:remote-addr req)
               recaptcha-token (get h "g-recaptcha-response")
-              {{success? :success} :body} (client/post "https://www.google.com/recaptcha/api/siteverify"
-                                                       {:form-params {:secret (:recaptcha-secret env)
-                                                                      :response recaptcha-token
-                                                                      :remoteip ip }
-                                                        :as :json})]
+              {{success? :success} :body}
+              (client/post "https://www.google.com/recaptcha/api/siteverify"
+                           {:form-params {:secret (:recaptcha-secret env)
+                                          :response recaptcha-token
+                                          :remoteip ip }
+                            :as :json})]
           (if success?
             (do
               (send-message b)
