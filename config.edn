@@ -1,0 +1,29 @@
+{:site-title           "My Blog"
+ :author               "Rory How"
+ :description          "I'm going to ramble here"
+ :site-url             "https://www.rory.how"
+ :post-root            "posts"
+ :page-root            "pages"
+ :post-root-uri        ""
+ :blog-prefix          "/blog"
+ :rss-name             "feed.xml"
+ :rss-filters          ["rory.how"]
+ :recent-posts         3
+ :post-date-format     "yyyy-MM-dd"
+ :archive-group-format "yyyy MMMM"
+ :sass-src             []
+ :sass-path            "sass"
+ :compass-path         "compass"
+ :theme                "blue"
+ :resources            ["img"]
+ :keep-files           [".git"]
+ :disqus?              false
+ :disqus-shortname     ""
+ :ignored-files        [#"\.#.*" #".*\.swp$"]
+ :posts-per-page       5
+ :blocks-per-preview   2
+ :previews?            false
+ :clean-urls?          true
+ :hide-future-posts?   true
+ :klipse               {}
+ :debug?               true}
