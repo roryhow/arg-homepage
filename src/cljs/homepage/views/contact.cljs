@@ -37,7 +37,7 @@
            [:label {:className "label"} "Email"]
            [:div {:className "control is-expanded"}
             [:input {:className "input"
-                     :placeholder "maurice.moss@reynolmindustries.co.uk"
+                     :placeholder "maurice.moss@reynholmindustries.co.uk"
                      :on-change #(swap! content assoc :email (-> % .-target .-value))}]]]]]
         [:div {:className "field"}
          [:label {:className "label"} "Message"]

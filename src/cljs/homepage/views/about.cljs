@@ -10,7 +10,7 @@
     [:p {:style {:display "inline"}} "You can find out a little bit more about me by looking at my "]
     [:a {:href "https://www.linkedin.com/in/roryhow/" :target "_blank"} "LinkedIn profile"]
     [:p {:style {:display "inline"}} ". Or, if you'd like to look at some of the projects that I work on you can check out my "]
-    [:a {:href "https://github.com/rhow93" :target "_blank"} "GitHub profile"]
+    [:a {:href "https://github.com/roryhow" :target "_blank"} "GitHub profile"]
     [:p {:style {:display "inline"}} ". I also ramble occasionally on "]
     [:a {:href "https://twitter.com/argwick" :target "_blank"} "Twitter"]
     [:p {:style {:display "inline"}} "."]]
